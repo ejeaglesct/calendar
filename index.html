@@ -21,36 +21,38 @@
 
         body {
             font-family: Arial, sans-serif;
+            font-size: 10pt;
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
         }
 
         .calendar {
-            width: 150px;
-            border-radius: 20px;
-            padding: 20px;
-	    border-collapse: collapse;
-	    border: 1px solid #a9a9a9;
+            width: 200px;
+            border-radius: 15px;
+            padding: 10px;
+            border-collapse: collapse;
+            border: 1px solid #a9a9a9;
             background-color: var(--bg-color);
         }
 
         .calendar-header {
-            font-size: 1em;
+            font-size: 0.8em;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 3px;
         }
 
         .day {
-            padding: 10px;
-            border-radius: 5px;
+            padding: 5px;
+            border-radius: 3px;
             text-align: center;
+            font-size: 10pt;
         }
 
         .today {
