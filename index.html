@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Calendar Widget</title>
+    <style>
+        :root {
+            --bg-color: white;
+            --text-color: black;
+            --highlight-color: #0078FF;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1e1e1e;
+                --text-color: white;
+                --highlight-color: #00A6FF;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .calendar {
+            width: 300px;
+            border-radius: 20px;
+            padding: 20px;
+	    border-collapse: collapse;
+	    border: 1px solid #000;
+            background-color: var(--bg-color);
+        }
+
+        .calendar-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .day {
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .today {
+            background-color: var(--highlight-color);
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <div class="calendar-header" id="calendar-header"></div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <script>
+        function generateCalendar() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+
+            document.getElementById("calendar-header").innerText = today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            const grid = document.getElementById("calendar-grid");
+            grid.innerHTML = "";
+
+            const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
+            daysOfWeek.forEach(day => {
+                let el = document.createElement("div");
+                el.classList.add("day");
+                el.style.fontWeight = "bold";
+                el.innerText = day;
+                grid.appendChild(el);
+            });
+
+            for (let i = 0; i < firstDay; i++) {
+                let empty = document.createElement("div");
+                empty.classList.add("day");
+                grid.appendChild(empty);
+            }
+
+            for (let day = 1; day <= lastDate; day++) {
+                let dateEl = document.createElement("div");
+                dateEl.classList.add("day");
+                dateEl.innerText = day;
+
+                if (day === today.getDate()) {
+                    dateEl.classList.add("today");
+                }
+
+                grid.appendChild(dateEl);
+            }
+        }
+
+        generateCalendar();
+    </script>
+</body>
+</html>
